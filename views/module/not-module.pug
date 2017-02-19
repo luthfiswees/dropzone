@@ -1,0 +1,71 @@
+doctype html
+html
+  head
+    title="NOT Module"
+    link(rel='stylesheet', href='/stylesheets/bootstrap/css/bootstrap.css')
+  body
+    include module-navbar.pug
+
+    article
+      div(class="container", style="float: left; width: 15%;")
+        br
+        br
+        h4 Module Navigation
+        div(class="list-group")
+          a(href="/module/introduction-module", class="list-group-item") Introduction
+          a(href="/module/proposition-module", class="list-group-item") Propositional Logic
+          a(href="#", class="list-group-item active") Negation Operator
+          a(href="/module/and-module", class="list-group-item") Conjunction Operator
+          a(href="/module/or-module", class="list-group-item") Disjunction Operator
+
+      div(class="container", style="float: right")
+        br
+        h2 NOT (¬) Negation Operator
+        br
+
+        h3 Definitions
+        p Let p be a proposition. The negation of p, denoted by ¬p (also denoted by p), is the statement
+        br
+        blockquote
+          p “It is not the case that p.”
+        br
+        p The proposition ¬p is read “not p.” The truth value of the negation of p, ¬p, is the opposite of the truth value of p.
+        br
+
+        h3 Example
+        h4 Question:
+        p Find the negation of the proposition ...
+        br
+        blockquote
+          p “Michael’s PC runs Linux”
+        br
+        p and express this in simple English.
+        br
+        h4 Answer:
+        p The negation is …
+        br
+        blockquote
+          p “It is not the case that Michael’s PC runs Linux.”
+        br
+        p This negation can be more simply expressed as “Michael’s PC does not run Linux.”
+        br
+
+        h3 Truth Table
+        p Truth table defines each possibility of proposition operators. Here is the truth table for proposition operator (¬).
+        br
+        div(class="container")
+          table(class="table table-striped", style="width:25%")
+            thead
+              tr
+                th P
+                th ¬P
+            tbody
+              tr
+                td T
+                td F
+              tr
+                td F
+                td T
+
+        button(class="btn btn-primary navbar-btn")
+          a(href="#", style="color: white;") Next>>

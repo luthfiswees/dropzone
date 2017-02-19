@@ -1,0 +1,40 @@
+doctype html
+html
+  head
+    title="NOT Module"
+    link(rel='stylesheet', href='/stylesheets/bootstrap/css/bootstrap.css')
+  body
+    include module-navbar.pug
+
+    article
+      div(class="container", style="float: left; width: 15%;")
+        br
+        br
+        h4 Module Navigation
+        div(class="list-group")
+          a(href="#", class="list-group-item active") Introduction
+          a(href="/module/proposition-module", class="list-group-item") Propositional Logic
+          a(href="/module/not-module", class="list-group-item") Negation Operator
+          a(href="/module/and-module", class="list-group-item") Conjunction Operator
+          a(href="/module/or-module", class="list-group-item") Disjunction Operator
+
+      div(class="container", style="float: right")
+        br
+        h2 Introduction to Dropzone
+        br
+
+        h3 Have fun with Dropzone
+        p In Dropzone, we will teach you about two fundamental operators in Propositional Logic, Conjunction (∧) and Disjunction (∨). We need to understand this thing first before we move on to the game. There’s only five pages in this tutorial. We will keep it simple, so hang on!
+        br
+
+        h3 Introduction to Propositional Logic
+        p The rules of logic give precise meaning to mathematical statements. These rules are used to distinguish between valid and invalid mathematical arguments.
+        p Besides the importance of logic in understanding mathematical reasoning, logic has numerous applications to computer science. These rules are used in the design of computer circuits, the construction of computer programs, the verification of the correctness of programs, and in many other ways.
+        br
+
+        h3 Credits
+        p Content of this module are taken from "Discrete Mathematics and It's Applications, 7th Edition" by Kenneth H. Rosen.
+        br
+
+        button(class="btn btn-primary navbar-btn")
+          a(href="#", style="color: white;") Next>>

@@ -1,0 +1,54 @@
+doctype html
+html
+  head
+    title="NOT Module"
+    link(rel='stylesheet', href='/stylesheets/bootstrap/css/bootstrap.css')
+  body
+    include module-navbar.pug
+
+    article
+      div(class="container", style="float: left; width: 15%;")
+        br
+        br
+        h4 Module Navigation
+        div(class="list-group")
+          a(href="/module/introduction-module", class="list-group-item") Introduction
+          a(href="#", class="list-group-item active") Propositional Logic
+          a(href="/module/not-module", class="list-group-item") Negation Operator
+          a(href="/module/and-module", class="list-group-item") Conjunction Operator
+          a(href="/module/or-module", class="list-group-item") Disjunction Operator
+
+      div(class="container", style="float: right")
+        br
+        h2 Proposition Logic
+        br
+
+        h3 Proposition
+        p A proposition is a declarative sentence that have a value of True and False, but not both.
+        br
+
+        h3 Example
+        p Let’s have a couple of propositions.
+        br
+        blockquote
+          p 1. Washington, D.C., is the capital of the United States of America.
+          p 2. Toronto is the capital of Canada.
+          p 3. 1+1=2.
+          p 4. 2+2=3.
+        br
+        p Propositions 1 and 3 are true, whereas 2 and 4 are false.
+        br
+        p Consider the following sentences.
+        br
+        blockquote
+          p 1. What time is it?
+          p 2. Read this carefully.
+          p 3. x+1=2.
+          p 4. x + y = z.
+        br
+        p Sentences 1 and 2 are not propositions because they are not declarative sentences. Sentences 3 and 4 are not propositions because they are neither true nor false. Note that each of sentences 3 and 4 can be turned into a proposition if we assign values to the variables.
+        p For example, if we look at sentence 3. If we assign values x to 1, then the statement will become true. If we assign values x to 2, then it will become false. And so on.
+        br
+
+        button(class="btn btn-primary navbar-btn")
+          a(href="#", style="color: white;") Next>>

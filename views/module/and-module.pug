@@ -1,0 +1,77 @@
+doctype html
+html
+  head
+    title="AND Module"
+    link(rel='stylesheet', href='/stylesheets/bootstrap/css/bootstrap.css')
+  body
+    include module-navbar.pug
+
+    article
+      div(class="container", style="float: left; width: 15%;")
+        br
+        br
+        h4 Module Navigation
+        div(class="list-group")
+          a(href="/module/introduction-module", class="list-group-item") Introduction
+          a(href="/module/proposition-module", class="list-group-item") Propositional Logic
+          a(href="/module/not-module", class="list-group-item") Negation Operator
+          a(href="#", class="list-group-item active") Conjunction Operator
+          a(href="/module/or-module", class="list-group-item") Disjunction Operator
+
+      div(class="container", style="float: right")
+        br
+        h2 AND (∧) Conjunction Operator
+        br
+
+        h3 Definitions
+        blockquote
+          p Let p and q be propositions. The conjunction of p and q, denoted by p ∧ q, is the proposition “p and q.” The conjunction p ∧ q is true when both p and q are true and is false otherwise.
+        br
+
+        h3 Example
+        h4 Question:
+        p Find the conjunction of the propositions p ∧ q where …
+        br
+        blockquote
+          p p : “Rebecca’s PC has more than 16 GB free hard disk space”
+          p q : “The processor in Rebecca’s PC runs faster than 1 GHz.”
+        br
+        h4 Answer:
+        p The conjunction of these propositions, p ∧ q, is the proposition.
+        br
+        blockquote
+          p Rebecca’s PC has more than 16 GB free hard disk space, and the processor in Rebecca’s PC runs faster than 1 GHz.
+        br
+        p For this conjunction to be true, both conditions given must be true. It is false, when one or both of these conditions are false.
+        br
+
+        h3 Truth Table
+        p Here is the truth table for proposition operator (∧).
+        br
+        div(class="container")
+          table(class="table table-striped", style="width:25%")
+            thead
+              tr
+                th P
+                th Q
+                th (P ∧ Q)
+            tbody
+              tr
+                td T
+                td T
+                td T
+              tr
+                td T
+                td F
+                td F
+              tr
+                td F
+                td T
+                td F
+              tr
+                td F
+                td F
+                td F
+
+        button(class="btn btn-primary navbar-btn")
+          a(href="#", style="color: white;") Next>>

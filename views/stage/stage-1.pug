@@ -1,0 +1,58 @@
+doctype html
+html
+  head
+    //- import interactjs and bootstrap
+    link(rel='stylesheet', href='/stylesheets/bootstrap/css/bootstrap.css')
+    script(src="//ajax.googleapis.com/ajax/libs/jquery/1.8.3/jquery.min.js")
+    script(src="/javascripts/interact.min.js")
+
+    //- import game script and css
+    link(rel="stylesheet", href="/stylesheets/stage-1/drag.css")
+    link(rel="stylesheet", href="/stylesheets/dropzone.css")
+    link(rel="stylesheet", href="/stylesheets/modal.css")
+    script(src="/javascripts/drag.js")
+    script(src="/javascripts/stage-1/dropzone.js")
+    script(src="/javascripts/time.js")
+    script(src="/javascripts/instruction.js")
+
+  body
+    include stage-navbar.pug
+
+    article
+      div(id="box-1", class="box-draggable")
+        p=text
+        
+      div(id="box-2", class="box-draggable")
+        p=text
+
+      div(id="box-dropzone", class="dropzone")
+        div(class="dropzone-text")
+          p(id="dropzone-title") Dropzone
+          p(id="dropzone-instruction") Put the <b>blue box</b> inside me
+
+      div(id="ilm-modal-box", class="ilm-modal")
+        div(class="modal-dialog")
+          div(class="modal-content")
+            div(class="modal-header")
+              div(class="modal-title")
+                h4 Level Complete
+            div(class="modal-body")
+              div(class="ilm-modal-content")
+                h3 Congratulations on completing the task!
+            div(class="modal-footer")
+              button(type="button", class="btn btn-primary")
+                a(id="ilm-button-text-color", href="/stage-2") Next Task
+
+      div(id="ilm-modal-box-instruction", class="ilm-modal")
+        div(class="modal-dialog")
+          div(class="modal-content")
+            div(class="modal-header")
+              div(class="modal-title")
+                h4 Instructions
+            div(class="modal-body")
+              div(class="ilm-modal-content")
+                h5 Just put the <b>blue box</b> inside the <b>Dropzone</b>
+            div(class="modal-footer")
+              button(id="close-modal-box-insruction", type="button", class="btn btn-primary") Close Instruction
+
+      include stage-lose-popup.pug
