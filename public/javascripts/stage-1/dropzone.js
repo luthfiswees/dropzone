@@ -17,6 +17,12 @@ interact('.dropzone').dropzone({
     var draggableElement = event.relatedTarget,
         dropzoneElement = event.target;
 
+    // // Record action
+    // user_actions.push({
+    //   action: "drag box into dropzone",
+    //   timestamp: Date.getTime()
+    // });
+
     // feedback the possibility of a drop
     if (event.relatedTarget.id == 'box-1'){
       dropzoneElement.classList.add('drop-target');
@@ -26,6 +32,12 @@ interact('.dropzone').dropzone({
     draggableElement.classList.add('can-drop');
   },
   ondragleave: function (event) {
+    // // Record action
+    // user_actions.push({
+    //   action: "drag box away from dropzone",
+    //   timestamp: Date.getTime()
+    // });
+
     // remove the drop feedback style
     if (event.relatedTarget.id == 'box-1'){
       event.target.classList.remove('drop-target');
@@ -35,6 +47,12 @@ interact('.dropzone').dropzone({
     event.relatedTarget.classList.remove('can-drop');
   },
   ondrop: function (event) {
+    // // Record action
+    // user_actions.push({
+    //   action: "drop box into dropzone",
+    //   timestamp: Date().getTime()
+    // });
+
     if (event.relatedTarget.id == 'box-1'){
       // display popup
       var modal = document.getElementById('ilm-modal-box');

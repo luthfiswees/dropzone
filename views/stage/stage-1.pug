@@ -10,6 +10,7 @@ html
     link(rel="stylesheet", href="/stylesheets/stage-1/drag.css")
     link(rel="stylesheet", href="/stylesheets/dropzone.css")
     link(rel="stylesheet", href="/stylesheets/modal.css")
+    script(src="/javascripts/stage-1/record.js")
     script(src="/javascripts/drag.js")
     script(src="/javascripts/stage-1/dropzone.js")
     script(src="/javascripts/time.js")
@@ -21,7 +22,7 @@ html
     article
       div(id="box-1", class="box-draggable")
         p=text
-        
+
       div(id="box-2", class="box-draggable")
         p=text
 
@@ -42,6 +43,7 @@ html
             div(class="modal-footer")
               button(type="button", class="btn btn-primary")
                 a(id="ilm-button-text-color", href="/stage-2") Next Task
+              button(id="ilm-button-show-data" ,type="button", class="btn btn-primary") Show Data
 
       div(id="ilm-modal-box-instruction", class="ilm-modal")
         div(class="modal-dialog")

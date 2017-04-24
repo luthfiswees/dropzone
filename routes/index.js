@@ -6,6 +6,15 @@ router.get('/', function(req, res, next) {
   res.render('index', { title: 'Boolean Logic ILM' });
 });
 
+/* GET authentication */
+router.get('/login', function(req, res, next) {
+  res.render('login', { title: 'ILM Login' });
+});
+
+router.get('/register', function(req, res, next) {
+  res.render('register', { title: 'ILM Account Registration' });
+});
+
 /* GET module page */
 router.get('/module/introduction-module', function(req, res, next) {
   res.render('module/introduction-module', { text: "" });

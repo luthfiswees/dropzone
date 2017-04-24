@@ -1,0 +1,43 @@
+doctype html
+html
+  head
+    //- import interactjs and bootstrap
+    link(rel='stylesheet', href='/stylesheets/bootstrap/css/bootstrap.css')
+    script(src="//ajax.googleapis.com/ajax/libs/jquery/1.8.3/jquery.min.js")
+    script(src="/javascripts/interact.min.js")
+
+    //- import game script and css
+    link(rel="stylesheet", href="/stylesheets/modal.css")
+
+  body
+    div(id="login-modal", class="ilm-modal-show")
+      div(class="modal-dialog")   
+        div(class="modal-content")
+          //- Modal header
+          div(class="modal-header")
+            button(type="button", class="close", data-dismiss="modal")
+            h4(class="modal-title") Boolean Logic ILM Login
+          //- Modal content
+          div(class="modal-body")
+            //- Form
+            form(class="form-horizontal", role="form", action="/api/validate", method="post")
+              //- Email field
+              div(class="form-group")
+                label(class="col-sm-2 control-label", for="inputEmailLogin") Email
+                div(class="col-sm-10")
+                  input(type="email", name="email", class="form-control", id="inputEmailLogin", placeholder="Email")
+              //- Password
+              div(class="form-group")
+                label(class="col-sm-2 control-label", for="inputPasswordLogin") Password
+                div(class="col-sm-10")
+                  input(type="password", name="password", class="form-control", id="inputPasswordLogin", placeholder="Password")
+              //- Submit button
+              div(class="form-group")
+                div(class="col-sm-offset-2 col-sm-10")
+                  button(type="submit", class="btn btn-primary") Sign In
+          //- Modal footer  
+          div(class="modal-footer")
+            p Don't have ID? 
+            button(type="button", class="btn btn-primary", data-dismiss="modal")
+              a(style="color: white", href="/register") Register
+              
