@@ -1,34 +1,31 @@
-// Initialize array variable for collecting action data
-// var request = require("request");
-//
-// window.user_actions = [];
-// localStorage.setItem("user_actions", "[]");
-
 // Record action
 $(document).ready(function(){
   // Action regarding box
   $('#box-1').click(function(event){
-    // window.user_actions.push({
-    //   action: "click blue box",
-    //   timestamp: Date.getTime()
-    // });
-    $.post('/api/test', function(){
-      console.log("Ajax success");
+    // Send action record to backend
+    $.ajax({
+      type: 'POST',
+      url: '/api/record_action',
+      data: {
+        'action': 'click blue box' // This is the name of the action
+      },
+      success: function(msg){
+        console.log("nice");
+      }
     });
-    // localStorage.setItem("user_actions", (JSON.parse(localStorage.getItem("user_actions"))).push({
-    //   action: "click blue box",
-    //   timestamp: Date.getTime()
-    // }));
   });
   $('#box-2').click(function(event){
-    window.user_actions.push({
-      action: "click green box",
-      timestamp: Date.getTime()
+    // Send action record to backend
+    $.ajax({
+      type: 'POST',
+      url: '/api/record_action',
+      data: {
+        'action': 'click green box' // This is the name of the action
+      },
+      success: function(msg){
+        console.log("nice");
+      }
     });
-    // localStorage.setItem("user_actions", (JSON.parse(localStorage.getItem("user_actions"))).push({
-    //   action: "click green box",
-    //   timestamp: Date.getTime()
-    // }));
   });
 
   // Regarding show data

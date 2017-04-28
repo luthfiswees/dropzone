@@ -16,12 +16,17 @@ interact('.dropzone').dropzone({
   ondragenter: function (event) {
     var draggableElement = event.relatedTarget,
         dropzoneElement = event.target;
-
-    // // Record action
-    // user_actions.push({
-    //   action: "drag box into dropzone",
-    //   timestamp: Date.getTime()
-    // });
+    // Send action to be recorded in backend
+    $.ajax({
+      type: 'POST',
+      url: '/api/record_action',
+      data: {
+        'action': 'drag box into dropzone' // This is the name of the action
+      },
+      success: function(msg){
+        console.log("nice");
+      }
+    });
 
     // feedback the possibility of a drop
     if (event.relatedTarget.id == 'box-1'){
@@ -32,11 +37,17 @@ interact('.dropzone').dropzone({
     draggableElement.classList.add('can-drop');
   },
   ondragleave: function (event) {
-    // // Record action
-    // user_actions.push({
-    //   action: "drag box away from dropzone",
-    //   timestamp: Date.getTime()
-    // });
+    // Send action to be recorded in backend
+    $.ajax({
+      type: 'POST',
+      url: '/api/record_action',
+      data: {
+        'action': 'drag box away from dropzone' // This is the name of the action
+      },
+      success: function(msg){
+        console.log("nice");
+      }
+    });
 
     // remove the drop feedback style
     if (event.relatedTarget.id == 'box-1'){
@@ -47,11 +58,17 @@ interact('.dropzone').dropzone({
     event.relatedTarget.classList.remove('can-drop');
   },
   ondrop: function (event) {
-    // // Record action
-    // user_actions.push({
-    //   action: "drop box into dropzone",
-    //   timestamp: Date().getTime()
-    // });
+    // Send action to be recorded in backend
+    $.ajax({
+      type: 'POST',
+      url: '/api/record_action',
+      data: {
+        'action': 'drop box in dropzone' // This is the name of the action
+      },
+      success: function(msg){
+        console.log("nice");
+      }
+    });
 
     if (event.relatedTarget.id == 'box-1'){
       // display popup

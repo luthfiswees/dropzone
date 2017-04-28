@@ -1,0 +1,17 @@
+html
+  head
+    //- import interactjs and bootstrap
+    link(rel='stylesheet', href='/stylesheets/bootstrap/css/bootstrap.css')
+    script(src="//ajax.googleapis.com/ajax/libs/jquery/1.8.3/jquery.min.js")
+    
+    //- import Highcharts(for chart display) and data.js where we put it 
+    script(src="http://code.highcharts.com/highcharts.js")
+    script(src="/javascripts/record.js")
+    
+  body
+    include navbar.pug
+    div(id="line_container", style="width:100%; height:300px;")
+    div(id="pie_container", style="width:100%; height:300px;")
+    
+    
+    
