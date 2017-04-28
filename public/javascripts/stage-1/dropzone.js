@@ -21,7 +21,8 @@ interact('.dropzone').dropzone({
       type: 'POST',
       url: '/api/record_action',
       data: {
-        'action': 'drag box into dropzone' // This is the name of the action
+        'action': 'drag box into dropzone', // This is the name of the action
+        'stage' : '1'
       },
       success: function(msg){
         console.log("nice");
@@ -42,7 +43,8 @@ interact('.dropzone').dropzone({
       type: 'POST',
       url: '/api/record_action',
       data: {
-        'action': 'drag box away from dropzone' // This is the name of the action
+        'action': 'drag box away from dropzone', // This is the name of the action
+        'stage' : '1'
       },
       success: function(msg){
         console.log("nice");
@@ -63,7 +65,8 @@ interact('.dropzone').dropzone({
       type: 'POST',
       url: '/api/record_action',
       data: {
-        'action': 'drop box in dropzone' // This is the name of the action
+        'action': 'drop box in dropzone', // This is the name of the action
+        'stage' : '1'
       },
       success: function(msg){
         console.log("nice");

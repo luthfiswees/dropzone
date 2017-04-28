@@ -5,13 +5,10 @@ var async      = require('async');
 var request    = require('request');
 var basicAuth  = require('basic-auth');
 var jwt        = require('jsonwebtoken');
-var secret_key = "secret";
 var auth       = require('./auth');
 
 // Authenticate password
 router.post('/validate', function(req, res, next){
-  console.log(req.body);
-
   if(!req.body.email || !req.body.password){
     console.log("No email or password provided");
     res.send("Unauthorized");
@@ -21,10 +18,8 @@ router.post('/validate', function(req, res, next){
     }).then(function(fetched_user){
       if (req.body.email === fetched_user['dataValues']['email'] && req.body.password === fetched_user['dataValues']['password']){
         console.log("Signed");
-        req.session.user = {"email": req.body.email};
+        req.session.user = {"email": req.body.email, "user_id": fetched_user['dataValues']['user_id']};
         res.redirect('/');
-        //req.session.jwt = jwt.sign({email: fetched_user['dataValues']['email'], password: fetched_user['dataValues']['password']}, secret_key);
-        //res.cookie('jwtToken', jwt.sign({email: fetched_user['dataValues']['email'], password: fetched_user['dataValues']['password']}, secret_key), { signed: true });
       } else {
         console.log("Fetched user not match");
         res.send("Unauthorized");
@@ -86,7 +81,41 @@ router.get('/logout', function(req,res){
 // Record action
 router.post('/record_action', auth, function(req, res, next){
   console.log("Actions : " + req.body.action);
-  res.send("Actions : " + req.body.action);
+
+  // Record every action and store into session
+  // req.session.game[req.body.stage].push({
+  //   "stage": req.body.stage, "action_name": req.body.action, "action_timestamp": Date.now()});
+  req.session.game["game_data"].push({
+    game_id: req.session.game['game_id'], stage: req.body.stage, action_name: req.body.action, action_timestamp: Date.now()});
+
+  console.log(req.session.game);
+  res.send("Actions recorded : " + req.body.action)
+});
+
+// Create object from recent game sessions
+router.get('/record_game', auth, function(req, res, next){
+  models.Action.bulkCreate(req.session.game["game_data"]).then(
+    function(){
+      // Update timestamp_end attribute to end game
+      models.Game.findOne({
+        where: {game_id: req.session.game["game_id"]}
+      }).then(function(game){
+        if (game){
+          game.updateAttributes({
+            timestamp_end: Date.now()
+          });
+          console.log("Game successfully ended");
+          res.send("Game successfully ended");
+        }
+      }).catch(function(err){
+        console.log(err);
+        res.send("Game not found");
+      });
+    }
+  ).catch(function(err){
+    console.log(err);
+    res.send("Game data not recorded");
+  });
 });
 
 // Test data page

@@ -8,7 +8,7 @@ $(document).ready(function(){
       url: '/api/record_action',
       data: {
         'action': 'click blue box', // This is the name of the action
-        'stage' : '1'
+        'stage' : '2'
       },
       success: function(msg){
         console.log("nice");
@@ -22,7 +22,7 @@ $(document).ready(function(){
       url: '/api/record_action',
       data: {
         'action': 'click green box', // This is the name of the action
-        'stage' : '1'
+        'stage' : '2'
       },
       success: function(msg){
         console.log("nice");

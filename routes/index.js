@@ -1,5 +1,6 @@
 var express = require('express');
 var router = express.Router();
+var models     = require('../models');
 var auth   = require('./auth');
 
 /* GET home page. */
@@ -36,6 +37,22 @@ router.get('/module/and-module', auth, function(req, res, next) {
 router.get('/module/or-module', auth, function(req, res, next) {
   res.render('module/or-module', { text: "" });
 });
+
+/* Create new game stage  */
+router.get('/generate_new_game', auth, function(req, res, next) {
+  // rewrite old game id with new id
+  // Create new game object
+  models.Game.create({
+    timestamp_start: Date.now(),
+    user_id: req.session.user['user_id']
+  }).then(function(game) {
+    req.session.game = {"game_id": game['dataValues']['game_id'],
+    // Initialize game data array
+   //"1": [], "2": [], "3": []};
+    "game_data": []};
+    res.redirect('/stage-1');
+  });
+})
 
 /* GET stage page. */
 router.get('/stage-1', auth, function(req, res, next) {

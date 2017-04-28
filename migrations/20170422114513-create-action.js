@@ -11,6 +11,9 @@ module.exports = {
       game_id: {
         type: Sequelize.INTEGER
       },
+      stage: {
+        type: Sequelize.STRING
+      },
       action_name: {
         type: Sequelize.STRING
       },

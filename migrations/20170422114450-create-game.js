@@ -11,9 +11,6 @@ module.exports = {
       user_id: {
         type: Sequelize.INTEGER
       },
-      stage: {
-        type: Sequelize.STRING
-      },
       timestamp_start: {
         type: Sequelize.DATE
       },

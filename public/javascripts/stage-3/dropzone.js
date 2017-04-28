@@ -19,6 +19,19 @@ interact('.dropzone').dropzone({
     var draggableElement = event.relatedTarget,
         dropzoneElement = event.target;
 
+    // Send action to be recorded in backend
+    $.ajax({
+      type: 'POST',
+      url: '/api/record_action',
+      data: {
+        'action': 'drag box into dropzone', // This is the name of the action
+        'stage' : '3'
+      },
+      success: function(msg){
+        console.log("nice");
+      }
+    });
+
     // feedback the possibility of a drop
     if (event.relatedTarget.id == 'box-1' || event.relatedTarget.id == 'box-2'){
       dropzoneElement.classList.add('drop-target');
@@ -28,6 +41,18 @@ interact('.dropzone').dropzone({
     draggableElement.classList.add('can-drop');
   },
   ondragleave: function (event) {
+    $.ajax({
+      type: 'POST',
+      url: '/api/record_action',
+      data: {
+        'action': 'drag box away from dropzone', // This is the name of the action
+        'stage' : '3'
+      },
+      success: function(msg){
+        console.log("nice");
+      }
+    });
+
     // remove the drop feedback style
     if (event.relatedTarget.id == 'box-1' || event.relatedTarget.id == 'box-2'){
       event.target.classList.remove('drop-target');
@@ -37,6 +62,19 @@ interact('.dropzone').dropzone({
     event.relatedTarget.classList.remove('can-drop');
   },
   ondrop: function (event) {
+    // Send action to be recorded in backend
+    $.ajax({
+      type: 'POST',
+      url: '/api/record_action',
+      data: {
+        'action': 'drop box in dropzone', // This is the name of the action
+        'stage' : '3'
+      },
+      success: function(msg){
+        console.log("nice");
+      }
+    });
+
     if (event.relatedTarget.id == 'box-1' || event.relatedTarget.id == 'box-2'){
       // Change text
       event.relatedTarget.textContent = 'Right';

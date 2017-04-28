@@ -10,10 +10,11 @@ html
     link(rel="stylesheet", href="/stylesheets/stage-3/drag.css")
     link(rel="stylesheet", href="/stylesheets/dropzone.css")
     link(rel="stylesheet", href="/stylesheets/modal.css")
+    script(src="/javascripts/stage-3/record.js")
     script(src="/javascripts/drag.js")
     script(src="/javascripts/stage-3/dropzone.js")
     script(src="/javascripts/time.js")
-    script(src="/javascripts/instruction.js")
+    script(src="/javascripts/stage-3/instruction.js")
 
   body
     include stage-navbar.pug
@@ -42,7 +43,7 @@ html
                 h3 Congratulations on completing the task!
             div(class="modal-footer")
               button(type="button", class="btn btn-primary")
-                a(id="ilm-button-text-color", href="/stage-1") Next Task
+                a(id="ilm-button-text-color", href="/api/record_game") Next Task
 
       div(id="ilm-modal-box-instruction", class="ilm-modal")
         div(class="modal-dialog")

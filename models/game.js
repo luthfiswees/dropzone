@@ -7,7 +7,6 @@ module.exports = function(sequelize, DataTypes) {
         autoIncrement: true
     },
     user_id: DataTypes.INTEGER,
-    stage: DataTypes.STRING,
     timestamp_start: DataTypes.DATE,
     timestamp_end: DataTypes.DATE
   }, {

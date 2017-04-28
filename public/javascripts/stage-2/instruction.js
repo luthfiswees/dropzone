@@ -7,7 +7,8 @@ $(document).ready(function(){
       type: 'POST',
       url: '/api/record_action',
       data: {
-        'action': 'open instruction' // This is the name of the action
+        'action': 'open instruction', // This is the name of the action
+        'stage' : '2'
       },
       success: function(msg){
         console.log("nice");
@@ -22,7 +23,8 @@ $(document).ready(function(){
       type: 'POST',
       url: '/api/record_action',
       data: {
-        'action': 'close instruction' // This is the name of the action
+        'action': 'close instruction', // This is the name of the action
+        'stage' : '2'
       },
       success: function(msg){
         console.log("nice");
