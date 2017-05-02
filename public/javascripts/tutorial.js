@@ -1,0 +1,13 @@
+$(document).ready(function(){
+  $('#close-modal-box-introduction-1').click(function(event){
+    $('#ilm-modal-box-introduction-1').hide();
+    $('#ilm-modal-box-introduction-2').show();
+  });
+  $('#close-modal-box-introduction-2').click(function(event){
+    $('#ilm-modal-box-introduction-2').hide();
+    $('#ilm-modal-box-introduction-3').show();
+  });
+  $('#close-modal-box-introduction-3').click(function(event){
+    $('#ilm-modal-box-introduction-3').hide();
+  });
+});

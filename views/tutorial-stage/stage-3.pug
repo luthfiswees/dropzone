@@ -13,12 +13,58 @@ html
     script(src="/javascripts/stage-3/record.js")
     script(src="/javascripts/drag.js")
     script(src="/javascripts/stage-3/dropzone.js")
-    script(src="/javascripts/time.js")
+    script(src="/javascripts/tutorial-time.js")
     script(src="/javascripts/stage-3/instruction.js")
+    script(src="/javascripts/tutorial.js")
 
   body
     include stage-navbar.pug
+    
+    //- Pop up
+    div(id="ilm-modal-box-introduction-1", class="ilm-modal-show")
+      div(class="modal-dialog")
+        div(class="modal-content")
+          div(class="modal-header")
+            div(class="modal-title")
+              h4 Tutorial
+          div(class="modal-body")
+            div(class="ilm-modal-content")
+              h4 Introducing the (v) OR Operator
+              br
+              p This operator is also one of the fundamental operators in <b>Boolean Logic</b>
+          div(class="modal-footer")
+            button(id="close-modal-box-introduction-1", type="button", class="btn btn-primary") Next
+            
+    div(id="ilm-modal-box-introduction-2", class="ilm-modal")
+      div(class="modal-dialog")
+        div(class="modal-content")
+          div(class="modal-header")
+            div(class="modal-title")
+              h4 Tutorial
+            div(class="modal-body")
+              div(class="ilm-modal-content")
+                h4 OR means you need to satisfy one or more conditions for the statement to be true
+                br
+                p Look at this instructions (Sssst! This one --> <b>'BLUE v GREEN'</b>)
+                p This means, in order to complete the level you need to put the <b>BLUE</b> box or the <b>GREEN</b> box inside the <b>Dropzone</b>
+            div(class="modal-footer")
+              button(id="close-modal-box-introduction-2", type="button", class="btn btn-primary") Next
+              
+    div(id="ilm-modal-box-introduction-3", class="ilm-modal")
+      div(class="modal-dialog")
+        div(class="modal-content")
+          div(class="modal-header")
+            div(class="modal-title")
+              h4 Tutorial
+            div(class="modal-body")
+              div(class="ilm-modal-content")
+                h4 So let's get started!
+                br
+                p Put the <b>BLUE</b> box or the <b>GREEN</b> box inside the <b>Dropzone</b> to complete the level.
+              div(class="modal-footer")
+                button(id="close-modal-box-introduction-3", type="button", class="btn btn-primary") Next
 
+    //- Main content
     article
       div(id="box-1", class="box-draggable")
         p=text

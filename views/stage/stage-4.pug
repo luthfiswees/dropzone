@@ -7,14 +7,14 @@ html
     script(src="/javascripts/interact.min.js")
 
     //- import game script and css
-    link(rel="stylesheet", href="/stylesheets/stage-3/drag.css")
+    link(rel="stylesheet", href="/stylesheets/stage-4/drag.css")
     link(rel="stylesheet", href="/stylesheets/dropzone.css")
     link(rel="stylesheet", href="/stylesheets/modal.css")
-    script(src="/javascripts/stage-3/record.js")
+    script(src="/javascripts/stage-4/record.js")
     script(src="/javascripts/drag.js")
-    script(src="/javascripts/stage-3/dropzone.js")
+    script(src="/javascripts/stage-4/dropzone.js")
     script(src="/javascripts/time.js")
-    script(src="/javascripts/stage-3/instruction.js")
+    script(src="/javascripts/stage-4/instruction.js")
 
   body
     include stage-navbar.pug
@@ -30,7 +30,7 @@ html
         div(class="dropzone-text")
           p(id="dropzone-title") Dropzone
           p(id="dropzone-instruction")
-            b BLUE ∨ GREEN
+            b ¬BLUE
 
       div(id="ilm-modal-box", class="ilm-modal")
         div(class="modal-dialog")
@@ -43,7 +43,7 @@ html
                 h3 Congratulations on completing the task!
             div(class="modal-footer")
               button(type="button", class="btn btn-primary")
-                a(id="ilm-button-text-color", href="/stage-4") Next Task
+                a(id="ilm-button-text-color", href="/stage-5") Next Task
 
       div(id="ilm-modal-box-instruction", class="ilm-modal")
         div(class="modal-dialog")
@@ -53,9 +53,9 @@ html
                 h4 Instructions
             div(class="modal-body")
               div(class="ilm-modal-content")
-                h4 The <b>OR</b> (∨) operator means that you need to satisfy at least one conditions.
+                h4 The <b>NOT</b> (¬) operator means that you need to satisfy other conditions other than the stated one.
                 br
-                p In this case, you should put the <b>blue</b> box or the <b>green</b> box
+                p In this case, you should put any box as long as it's not a <b>blue</b> box 
                 p inside the <b>Dropzone</b>.
             div(class="modal-footer")
               button(id="close-modal-box-insruction", type="button", class="btn btn-primary") Close Instruction

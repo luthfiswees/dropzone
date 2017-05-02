@@ -18,7 +18,12 @@ router.post('/validate', function(req, res, next){
     }).then(function(fetched_user){
       if (req.body.email === fetched_user['dataValues']['email'] && req.body.password === fetched_user['dataValues']['password']){
         console.log("Signed");
-        req.session.user = {"email": req.body.email, "user_id": fetched_user['dataValues']['user_id']};
+        req.session.user = {
+          "email": req.body.email,
+          "user_id": fetched_user['dataValues']['user_id'],
+          "name": fetched_user['dataValues']['first_name'],
+          "is_first": fetched_user['dataValues']['is_first']
+        };
         res.redirect('/');
       } else {
         console.log("Fetched user not match");
@@ -36,7 +41,9 @@ router.post('/register', function(req, res, next) {
   var username         = req.body.email;
   var password         = req.body.password;
   var confirm_password = req.body.confirmPassword;
-  if (!username || !password || !confirm_password){
+  var first_name       = req.body.first_name;
+  var last_name        = req.body.last_name;
+  if (!username || !password || !confirm_password || !first_name){
     console.log("Credentials not complete");
     res.json({
       "error": false,
@@ -48,7 +55,9 @@ router.post('/register', function(req, res, next) {
       console.log("Password confirmed");
       models.User.create({
         email: username,
-        password: password
+        password: password,
+        first_name: first_name,
+        last_name: last_name
       }).then(function(user){
         console.log("Account registered in database");
         res.json({
@@ -83,17 +92,18 @@ router.post('/record_action', auth, function(req, res, next){
   console.log("Actions : " + req.body.action);
 
   // Record every action and store into session
-  // req.session.game[req.body.stage].push({
-  //   "stage": req.body.stage, "action_name": req.body.action, "action_timestamp": Date.now()});
   req.session.game["game_data"].push({
     game_id: req.session.game['game_id'], stage: req.body.stage, action_name: req.body.action, action_timestamp: Date.now()});
 
-  console.log(req.session.game);
   res.send("Actions recorded : " + req.body.action)
 });
 
 // Create object from recent game sessions
 router.get('/record_game', auth, function(req, res, next){
+  console.log(req.session.game);
+  if (req.session.user['tutorial_commencing']){
+    req.session.user['tutorial_commencing'] = false;
+  } 
   models.Action.bulkCreate(req.session.game["game_data"]).then(
     function(){
       // Update timestamp_end attribute to end game
@@ -105,7 +115,8 @@ router.get('/record_game', auth, function(req, res, next){
             timestamp_end: Date.now()
           });
           console.log("Game successfully ended");
-          res.send("Game successfully ended");
+          console.log("Your game data will be shown");
+          res.redirect("/api/data_page");
         }
       }).catch(function(err){
         console.log(err);
@@ -119,7 +130,7 @@ router.get('/record_game', auth, function(req, res, next){
 });
 
 // Test data page
-router.get('/test_data_page', function(req, res, next) {
+router.get('/data_page', function(req, res, next) {
   res.render('record');
 });
 

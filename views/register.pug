@@ -21,24 +21,35 @@ html
           div(class="modal-body")
             //- Form
             form(class="form-horizontal", role="form", action="/api/register", method="post")
+              //- First Name field
+              div(class="form-group")
+                label(class="col-sm-2 control-label", for="inputFirstName") First Name*
+                div(class="col-sm-10")
+                  input(type="text", name="first_name", class="form-control", id="inputFirstName", placeholder="First Name")
+              //- Last Name field
+              div(class="form-group")
+                label(class="col-sm-2 control-label", for="inputLastName") Last Name
+                div(class="col-sm-10")
+                  input(type="text", name="last_name", class="form-control", id="inputLastName", placeholder="Last Name")
               //- Email field
               div(class="form-group")
-                label(class="col-sm-2 control-label", for="inputEmailLogin") Email
+                label(class="col-sm-2 control-label", for="inputEmailLogin") Email*
                 div(class="col-sm-10")
                   input(type="email", name="email", class="form-control", id="inputEmailLogin", placeholder="Email")
               //- Password
               div(class="form-group")
-                label(class="col-sm-2 control-label", for="inputPasswordLogin") Password
+                label(class="col-sm-2 control-label", for="inputPasswordLogin") Password*
                 div(class="col-sm-10")
                   input(type="password", name="password", class="form-control", id="inputPasswordLogin", placeholder="Password")
               //- Password
               div(class="form-group")
-                label(class="col-sm-2 control-label", for="inputConfirmPasswordLogin") Confirm Password
+                label(class="col-sm-2 control-label", for="inputConfirmPasswordLogin") Confirm Password*
                 div(class="col-sm-10")
                   input(type="password", name="confirmPassword", class="form-control", id="inputConfirmPasswordLogin", placeholder="Confirm Password")
               //- Submit button
               div(class="form-group")
                 div(class="col-sm-offset-2 col-sm-10")
+                  p ( * ) Required
                   button(type="submit", class="btn btn-primary") Register
           //- Modal footer  
           div(class="modal-footer")

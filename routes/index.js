@@ -38,20 +38,55 @@ router.get('/module/or-module', auth, function(req, res, next) {
   res.render('module/or-module', { text: "" });
 });
 
+/* Tutorial module */
+router.get('/tutorial-module/introduction-module', auth, function(req, res, next) {
+  res.render('tutorial-module/introduction-module', { text: "" });
+});
+
 /* Create new game stage  */
 router.get('/generate_new_game', auth, function(req, res, next) {
   // rewrite old game id with new id
+  // Check if is_first boolean is true, if true trigger tutorial
+  if (req.session.user['is_first']){
+    models.User.findOne({
+      where: {user_id: req.session.user['user_id']}
+    }).then(function(user) {
+      if(user){
+        user.updateAttributes({
+          is_first: false
+        });
+        req.session.user['is_first'] = false;
+        req.session.user['tutorial_commencing'] = true;
+        console.log("Commencing tutorial");
+        res.redirect('/tutorial-module/introduction-module');
+      } else {
+        res.redirect('/');
+      }
+    });
   // Create new game object
-  models.Game.create({
-    timestamp_start: Date.now(),
-    user_id: req.session.user['user_id']
-  }).then(function(game) {
-    req.session.game = {"game_id": game['dataValues']['game_id'],
-    // Initialize game data array
-   //"1": [], "2": [], "3": []};
-    "game_data": []};
-    res.redirect('/stage-1');
-  });
+  } else {
+    if (req.session.user['tutorial_commencing']){
+      models.Game.create({
+        timestamp_start: Date.now(),
+        user_id: req.session.user['user_id']
+      }).then(function(game) {
+        req.session.game = {"game_id": game['dataValues']['game_id'],
+        // Initialize game data array
+        "game_data": []};
+        res.redirect('/stage-1-tutorial');
+      });
+    } else {
+      models.Game.create({
+        timestamp_start: Date.now(),
+        user_id: req.session.user['user_id']
+      }).then(function(game) {
+        req.session.game = {"game_id": game['dataValues']['game_id'],
+        // Initialize game data array
+        "game_data": []};
+        res.redirect('/stage-1');
+      });
+    }
+  }
 })
 
 /* GET stage page. */
@@ -60,11 +95,40 @@ router.get('/stage-1', auth, function(req, res, next) {
 });
 
 router.get('/stage-2', auth, function(req, res, next) {
-  res.render('stage/stage-2', { text: "" });
+  if (req.session.user['tutorial_commencing']){
+    res.render('tutorial-stage/stage-2', { text: "" });
+  } else {
+    res.render('stage/stage-2', { text: "" });
+  }
 });
 
-router.get('/stage-3', function(req, res, next) {
-  res.render('stage/stage-3', { text: "" });
+router.get('/stage-3', auth, function(req, res, next) {
+  if (req.session.user['tutorial_commencing']){
+    res.render('tutorial-stage/stage-3', { text: "" });
+  } else {
+    res.render('stage/stage-3', { text: "" });
+  }
+});
+
+router.get('/stage-4', auth, function(req, res, next) {
+  if (req.session.user['tutorial_commencing']){
+    res.render('tutorial-stage/stage-4', { text: "" });
+  } else {
+    res.render('stage/stage-4', { text: "" });
+  }
+});
+
+router.get('/stage-5', auth, function(req, res, next) {
+  if (req.session.user['tutorial_commencing']){
+    res.render('tutorial-stage/stage-5', { text: "" });
+  } else {
+    res.render('stage/stage-5', { text: "" });
+  }
+});
+
+/* Tutorial Stage */
+router.get('/stage-1-tutorial', auth, function(req, res, next) {
+  res.render('tutorial-stage/stage-1', { text: "" });
 });
 
 
