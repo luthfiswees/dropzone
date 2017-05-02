@@ -6,7 +6,7 @@
     "start": "node ./bin/www"
   },
   "dependencies": {
-    "async": "^2.3.0",
+    "async": "^2.4.0",
     "basic-auth": "^1.1.0",
     "body-parser": "~1.16.0",
     "browserify": "^14.1.0",

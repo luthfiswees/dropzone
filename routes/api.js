@@ -103,7 +103,7 @@ router.get('/record_game', auth, function(req, res, next){
   console.log(req.session.game);
   if (req.session.user['tutorial_commencing']){
     req.session.user['tutorial_commencing'] = false;
-  } 
+  }
   models.Action.bulkCreate(req.session.game["game_data"]).then(
     function(){
       // Update timestamp_end attribute to end game
@@ -130,8 +130,116 @@ router.get('/record_game', auth, function(req, res, next){
 });
 
 // Test data page
-router.get('/data_page', function(req, res, next) {
+router.get('/data_page', auth, function(req, res, next) {
   res.render('record');
 });
+
+// Get list of data to be presented in line chart
+router.post('/behaviour_chart_data', auth, function(req, res, next) {
+  models.Game.findAll({
+    where: {user_id: req.session.user['user_id']}
+  }).then(function(game_data){
+    var parsed_game_data = game_data;
+    Object.keys(parsed_game_data).map(function(key, index) {
+      parsed_game_data[key] = parsed_game_data[key]['dataValues']['game_id'];
+    });
+    models.Action.findAll({
+      where: {game_id: parsed_game_data}
+    }).then(function(action_data){
+      var parsed_action_data = action_data;
+      Object.keys(parsed_action_data).map(function(key, index) {
+        // Map to SRL Actions
+        try {
+          var current_action = parsed_action_data[index]['dataValues']['action_name'];
+          var next_action    = parsed_action_data[index+1]['dataValues']['action_name'];
+          var click_regex    = new RegExp("click (.* )? box");
+          if (click_regex.test(current_action)){
+            // Define as Cognitive Actions
+            parsed_action_data[key] = 3;
+          } else if (current_action === "open instruction" && next_action === "close instruction"){
+            // Define as Planning
+            parsed_action_data[key] = 4;
+          } else if (current_action === "drag box into dropzone" && next_action === "drop box in dropzone"){
+            // Define as Cognitive Actions
+            parsed_action_data[key] = 3;
+          } else if (current_action === "drag box into dropzone" && next_action === "drop box away from dropzone") {
+            // Define as Regulating
+            parsed_action_data[key] = 1;
+          } else if (current_action === "drop box in dropzone" && click_regex.test(next_action)) {
+            // Define as Monitoring
+            parsed_action_data[key] = 2;
+          } else {
+            parsed_action_data[key] = 0;
+          }
+        } catch(err) {
+          parsed_action_data[key] = 0;
+        }
+      });
+      res.send(parsed_action_data);
+    });
+  });
+});
+
+router.post('/dominant_behaviour_chart_data', auth, function(req, res, next) {
+  models.Game.findAll({
+    where: {user_id: req.session.user['user_id']}
+  }).then(function(game_data){
+    var parsed_game_data = game_data;
+    Object.keys(parsed_game_data).map(function(key, index) {
+      parsed_game_data[key] = parsed_game_data[key]['dataValues']['game_id'];
+    });
+    models.Action.findAndCountAll({
+      where: {game_id: parsed_game_data}
+    }).then(function(action_data){
+      var parsed_action_data = action_data.rows;
+      var number_of_all_action = parseFloat(action_data.count);
+
+      Object.defineProperties(Array.prototype, {
+        count: {
+          value: function(value) {
+            return this.reduce(function(total,x){return x==value ? total+1 : total}, 0);
+          }
+        }
+      });
+      Object.keys(parsed_action_data).map(function(key, index) {
+        // Map to SRL Actions
+        try {
+          var current_action = parsed_action_data[index]['dataValues']['action_name'];
+          var next_action    = parsed_action_data[index+1]['dataValues']['action_name'];
+          var click_regex    = new RegExp("click (.* )? box");
+          if (click_regex.test(current_action)){
+            // Define as Cognitive Actions
+            parsed_action_data[key] = 3;
+          } else if (current_action === "open instruction" && next_action === "close instruction"){
+            // Define as Planning
+            parsed_action_data[key] = 4;
+          } else if (current_action === "drag box into dropzone" && next_action === "drop box in dropzone"){
+            // Define as Cognitive Actions
+            parsed_action_data[key] = 3;
+          } else if (current_action === "drag box into dropzone" && next_action === "drop box away from dropzone") {
+            // Define as Regulating
+            parsed_action_data[key] = 1;
+          } else if (current_action === "drop box in dropzone" && click_regex.test(next_action)) {
+            // Define as Monitoring
+            parsed_action_data[key] = 2;
+          } else {
+            parsed_action_data[key] = 0;
+          }
+        } catch(err) {
+          parsed_action_data[key] = 0;
+        }
+      });
+      //console.log("Number of Zero : " + parsed_action_data.count(0));
+      res.json({"0": parsed_action_data.count(0)/number_of_all_action ,
+                "1": parsed_action_data.count(1)/number_of_all_action,
+                "2": parsed_action_data.count(2)/number_of_all_action,
+                "3": parsed_action_data.count(3)/number_of_all_action,
+                "4": parsed_action_data.count(4)/number_of_all_action
+              });
+    });
+  });
+});
+
+// Get list of data to be presented in pie chart
 
 module.exports = router;
