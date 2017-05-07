@@ -10,15 +10,28 @@ html
     
   body
     include navbar.pug
-    h3 Overall Statistics
+    br
+    br
+    
+    h3 Overall Activity Statistics
     div(id="line_container", style="width:100%; height:300px;")
-    div(id="pie_container", style="width:100%; height:300px;")
+    div(class="container")
+      div(class="row")
+        div(class="col-md-6")
+          div(id="pie_container")
+        div(class="col-md-6")
+          div(id="pie_container_undefined")
     br 
     br
       
-    h3 Latest Game Statistics
+    h3 Latest Activity Statistics
     div(id="latest_game_line_container", style="width:100%; height:300px;")
-    div(id="latest_game_pie_container", style="width:100%; height:300px;")
+    div(class="container")
+      div(class="row")
+        div(class="col-md-6")
+          div(id="latest_game_pie_container")
+        div(class="col-md-6")
+          div(id="latest_game_pie_container_undefined")
     br 
     br 
     br
