@@ -138,9 +138,23 @@ router.get('/record_game', auth, function(req, res, next){
   });
 });
 
-// Test data page
+// Access data page
 router.get('/data_page', auth, function(req, res, next) {
-  res.render('record');
+  if (req.session.user['latest_game_id'] === undefined){
+    console.log("Latest Game ID not found");
+    models.Game.findAndCountAll({
+      where: {user_id: req.session.user['user_id']}
+    }).then(function(game_data){
+      req.session.user['latest_game_id'] = parseInt(game_data.count);
+      res.render('record');
+    }).catch(function(err){
+      console.log(err);
+      res.redirect('/');
+    });
+  } else {
+    console.log("Latest Game ID found");
+    res.render('record');
+  }
 });
 
 // Get list of data to be presented in line chart
@@ -245,7 +259,7 @@ router.post('/dominant_behaviour_chart_data', auth, function(req, res, next) {
 // Get list of data to be presented in line chart
 router.post('/latest_game_behaviour_chart_data', auth, function(req, res, next) {
     models.Action.findAll({
-      where: {game_id: req.session.game['latest_game_id']}
+      where: {game_id: req.session.user['latest_game_id']}
     }).then(function(action_data){
       var parsed_action_data = action_data;
       Object.keys(parsed_action_data).map(function(key, index) {
@@ -282,7 +296,7 @@ router.post('/latest_game_behaviour_chart_data', auth, function(req, res, next) 
 
 router.post('/latest_game_dominant_behaviour_chart_data', auth, function(req, res, next) {
     models.Action.findAndCountAll({
-      where: {game_id: req.session.game['latest_game_id']}
+      where: {game_id: req.session.user['latest_game_id']}
     }).then(function(action_data){
       var parsed_action_data = action_data.rows;
       var number_of_all_action = parseFloat(action_data.count);
