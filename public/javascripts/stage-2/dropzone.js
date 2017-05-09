@@ -1,5 +1,6 @@
-// Set winning condition to false
-win = false;
+// Set winning and out condition to false
+var win = false;
+var out = false;
 
 // enable draggables to be dropped into this
 var counter = 0;

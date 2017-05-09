@@ -5,6 +5,15 @@ function setInitialTime(initialtime){
   });
 }
 
+// Set on close blocker
+window.onbeforeunload = function (e) {
+    e = e || window.event;
+    // For IE and Firefox prior to version 4
+    if (!win || !out) {
+        e.returnValue = 'Are you sure you want to quit?';
+    }
+};
+
 // Countdown the timer
 $(document).ready(function(){
   $('#close-modal-box-introduction-3').click(function(event){
@@ -17,6 +26,7 @@ $(document).ready(function(){
         $('#ilm-time-box-value').html(count - 1);
       } else {
         clearInterval(timer);
+        out = true;
 
         // Show up the popup
         if (!win){
