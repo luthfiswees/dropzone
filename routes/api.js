@@ -140,21 +140,18 @@ router.get('/record_game', auth, function(req, res, next){
 
 // Access data page
 router.get('/data_page', auth, function(req, res, next) {
-  if (req.session.user['latest_game_id'] === undefined){
-    console.log("Latest Game ID not found");
     models.Game.findAndCountAll({
-      where: {user_id: req.session.user['user_id']}
+      where: {
+        user_id: req.session.user['user_id'],
+        timestamp_end: {$ne: null}
+      }
     }).then(function(game_data){
-      req.session.user['latest_game_id'] = parseInt(game_data.count);
+      req.session.user['latest_game_id'] = parseInt((game_data.rows.pop())['dataValues']['game_id']);
       res.render('record');
     }).catch(function(err){
       console.log(err);
       res.redirect('/');
     });
-  } else {
-    console.log("Latest Game ID found");
-    res.render('record');
-  }
 });
 
 // Get list of data to be presented in line chart
