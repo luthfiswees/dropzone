@@ -7,32 +7,17 @@ html
     script(src="/javascripts/interact.min.js")
 
     //- import game script and css
-    link(rel="stylesheet", href="/stylesheets/stage-5/drag.css")
+    link(rel="stylesheet", href="/stylesheets/stage-7/drag.css")
     link(rel="stylesheet", href="/stylesheets/four-dropzone.css")
     link(rel="stylesheet", href="/stylesheets/modal.css")
-    script(src="/javascripts/stage-5/record.js")
+    script(src="/javascripts/stage-7/record.js")
     script(src="/javascripts/drag.js")
-    script(src="/javascripts/stage-5/dropzone.js")
+    script(src="/javascripts/stage-7/dropzone.js")
     script(src="/javascripts/time.js")
-    script(src="/javascripts/stage-5/instruction.js")
-    script(src="/javascripts/tutorial-end.js")
+    script(src="/javascripts/stage-7/instruction.js")
 
   body
     include stage-navbar.pug
-    
-    div(id="ilm-modal-box-introduction-1", class="ilm-modal-show")
-      div(class="modal-dialog")
-        div(class="modal-content")
-          div(class="modal-header")
-            div(class="modal-title")
-              h4 Tutorial
-          div(class="modal-body")
-            div(class="ilm-modal-content")
-              h4 Now you're ready
-              br
-              p Click next to continue playing the game.
-          div(class="modal-footer")
-            button(id="close-modal-box-introduction-1", type="button", class="btn btn-primary") Next
 
     article
       div(id="box-1", class="box-draggable")
@@ -51,7 +36,7 @@ html
         div(class="dropzone-text")
           p(id="dropzone-title") Dropzone
           p(id="dropzone-instruction")
-            b BLUE v GREEN v RED
+            b (BLUE v GREEN) ∧ (RED v YELLOW)
 
       div(id="ilm-modal-box", class="ilm-modal")
         div(class="modal-dialog")
@@ -64,7 +49,7 @@ html
                 h3 Congratulations on completing the task!
             div(class="modal-footer")
               button(type="button", class="btn btn-primary")
-                a(id="ilm-button-text-color", href="/stage-6") Next Task
+                a(id="ilm-button-text-color", href="/stage-8") Next Task
 
       div(id="ilm-modal-box-instruction", class="ilm-modal")
         div(class="modal-dialog")
@@ -74,9 +59,9 @@ html
                 h4 Instructions
             div(class="modal-body")
               div(class="ilm-modal-content")
-                h4 The <b>OR</b> (∨) operator means that you need to satisfy at least one conditions.
+                h4 The <b>OR</b> (∨) operator means that you need to satisfy at least one conditions. And <b>AND</b> (∧) operator means that you need to satisfy all conditions
                 br
-                p In this case, you should put the <b>blue</b> box, <b>green</b> box, or <b>red</b> box inside the <b>Dropzone</b>.
+                p In this case, you should pick one color for each pair. You should choose between <b>blue</b> and <b>green</b> box in the first pair and choose betweem <b>red</b> and <b>yellow</b> box and in second pair.
             div(class="modal-footer")
               button(id="close-modal-box-insruction", type="button", class="btn btn-primary") Close Instruction
 

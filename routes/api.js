@@ -68,10 +68,11 @@ router.post('/register', function(req, res, next) {
         last_name: last_name
       }).then(function(user){
         console.log("Account registered in database");
-        res.json({
+        console.log({
           "error": false,
           "message": "Successfully create an account with " + username
         });
+        res.redirect("/");
       });
     } else {
       console.log("Password confirmation failed");

@@ -126,6 +126,18 @@ router.get('/stage-5', auth, function(req, res, next) {
   }
 });
 
+router.get('/stage-6', auth, function(req, res, next) {
+  res.render('stage/stage-6', { text: "" });
+});
+
+router.get('/stage-7', auth, function(req, res, next) {
+  res.render('stage/stage-7', { text: "" });
+});
+
+router.get('/stage-8', auth, function(req, res, next) {
+  res.render('stage/stage-8', { text: "" });
+});
+
 /* Tutorial Stage */
 router.get('/stage-1-tutorial', auth, function(req, res, next) {
   res.render('tutorial-stage/stage-1', { text: "" });

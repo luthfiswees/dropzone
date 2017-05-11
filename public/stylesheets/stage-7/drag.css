@@ -1,0 +1,63 @@
+p {
+  font-family: verdana;
+}
+
+.box-draggable {
+  width: 50px;
+  height: 50px;
+  margin: 5%;
+
+  font-family: verdana;
+
+  border-radius: 0.75em;
+  padding: 4%;
+}
+
+#box-1 {
+  background-color: #29e;
+  color: white;
+
+  -webkit-transform: translate(0px, 0px);
+          transform: translate(0px, 0px);
+}
+
+#box-2 {
+  position: relative;
+  top: -150px;
+  left: 200px;
+
+  background-color: #0F0;
+  color: black;
+
+  -webkit-transform: translate(0px, 0px);
+          transform: translate(0px, 0px);
+}
+
+#box-3 {
+  position: relative;
+  top: -350px;
+  left: 400px;
+
+  background-color: red;
+  color: white;
+
+  -webkit-transform: translate(0px, 0px);
+          transform: translate(0px, 0px);
+}
+
+#box-4 {
+  position: relative;
+  top: -550px;
+  left: 600px;
+
+  background-color: yellow;
+  color: black;
+
+  -webkit-transform: translate(0px, 0px);
+          transform: translate(0px, 0px);
+}
+
+#drag-me::before {
+  content: "#" attr(id);
+  font-weight: bold;
+}
